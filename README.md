@@ -1,4 +1,4 @@
-# REST-service 🦹‍♀️
+# REST-service ✅
 
 Back-end part
 
