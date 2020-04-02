@@ -1,0 +1,44 @@
+{
+  "name": "portal.sdu.back-end",
+  "version": "1.6.0",
+  "description": "SDU's portal back-end part",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/app.js",
+    "build": "babel src --out-dir dist/",
+    "start": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benzo-gs1/portal.sdu.back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benzo-gs1/portal.sdu.back-end/issues"
+  },
+  "homepage": "https://github.com/benzo-gs1/portal.sdu.back-end#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "eventemitter2": "^6.2.1",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-plugin-root-import": "^6.4.1",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^7.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
