@@ -1,18 +1,17 @@
 import jwt from "jsonwebtoken";
 import config from "@/config";
-import pipe from "@/pipe";
 
 class TokenService {
   static create(data = {}, lifeTime = "1h") {
-    return jwt.sign(data, config.secret.user, {
+    return jwt.sign(data, config.secretKey, {
       expiresIn: lifeTime,
-      algorithm: config.secret.algorithm
+      algorithm: config.secretAlgorithm
     });
   }
 
   static validate(token) {
     try {
-      return jwt.verify(token, config.secret.user);
+      return jwt.verify(token, config.secretKey);
     } catch (err) {
       return false;
     }
@@ -35,9 +34,5 @@ class TokenService {
     return token ?? "";
   }
 }
-
-pipe.on("system::setup", () => {
-  console.info("| TokenService ready");
-});
 
 export default TokenService;
