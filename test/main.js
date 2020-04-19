@@ -15,9 +15,4 @@ describe("Configurations", () => {
     });
 });
 
-describe("Database connection", () => {
-  const uri = process.env.MONGODB_URI;
-  it("must have mongodb uri", () => {
-    expect(uri).not.to.be.undefined;
-  });
-});
+describe("Database connection", () => {});
