@@ -6,6 +6,9 @@ const configs = {
   isProduction: false,
   secretAlgorithm: "HS256",
   secretKey: "default",
+  db_username: "",
+  db_password: "",
+  db_connectionString: "",
 };
 
 export function setConfig(key, value) {
@@ -22,6 +25,9 @@ export function init() {
   setConfig("isProduction", process.env.ENV_MODE === "prod");
   setConfig("secretKey", process.env.USER_TOKEN_SECRET);
   setConfig("secretAlgorithm", process.env.TOKEN_ALGORITHM);
+  setConfig("db_username", process.env.NODE_ORACLEDB_USER);
+  setConfig("db_password", process.env.NODE_ORACLEDB_PASSWORD);
+  setConfig("db_connectionString", process.env.NODE_ORACLEDB_CONNECTIONSTRING);
 }
 
 export default configs;

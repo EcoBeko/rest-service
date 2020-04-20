@@ -5,7 +5,7 @@ export default deepFreeze({
     close: "server::close",
     setup: "server::setup",
   },
-  mongo: {
-    connected: "mongo::connected",
+  oracle: {
+    connected: "oracle::connected",
   },
 });

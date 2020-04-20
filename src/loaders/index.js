@@ -24,9 +24,9 @@ export default class Loaders {
     pipe.emit(events.server.setup);
 
     // initializing mongodb connection
-    Logger.log("MongoDB initializing....");
+    Logger.log("OracleDB initializing....");
     const connection = await dbInit();
-    Logger.log("MongoDB Done");
+    Logger.log("OracleDB Done");
 
     // initializing express & middleware plugins
     Logger.log("Express initializing....");

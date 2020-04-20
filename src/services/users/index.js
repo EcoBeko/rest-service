@@ -1,4 +1,3 @@
-import UsersModel from "../../models/users";
 import bcrypt from "bcrypt";
 
 class UsersService {
@@ -6,10 +5,10 @@ class UsersService {
     try {
       data.password = this.hashPassword(data.password);
 
-      const user = new UsersModel(data);
+      // const user = new UsersModel(data);
       return {
         status: true,
-        user: await user.save(),
+        // user: await user.save(),
       };
     } catch (error) {
       return {
@@ -20,7 +19,7 @@ class UsersService {
   }
 
   static async findByUsername(username) {
-    return await UsersModel.findOne({ username }).exec();
+    // return await UsersModel.findOne({ username }).exec();
   }
 
   static validatePasswords(data, encrypted) {
