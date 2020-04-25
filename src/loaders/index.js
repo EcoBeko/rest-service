@@ -1,11 +1,8 @@
 import routeCollector from "./route-collector";
 import serviceCollector from "./service-collector";
 import expressLoader from "./express-loader";
-import pipe from "@/pipe";
-import events from "@/pipe/names";
 import config from "@/config";
 import Logger from "@/services/logger";
-import { init as pipeInit } from "@/pipe";
 import { init as configsInit } from "@/config";
 import { init as dbInit } from "./db-loader";
 
@@ -15,13 +12,6 @@ export default class Loaders {
     Logger.log("Configs initializing....");
     configsInit();
     Logger.log("Configs Done");
-
-    // initializing event-pipe
-    Logger.log("EventPipe initializing....");
-    pipeInit();
-    Logger.log("EventPipe Done");
-
-    pipe.emit(events.server.setup);
 
     // initializing mongodb connection
     Logger.log("OracleDB initializing....");

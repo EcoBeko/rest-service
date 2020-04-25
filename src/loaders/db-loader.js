@@ -1,7 +1,5 @@
 import oracledb from "oracledb";
 import config from "@/config";
-import pipe from "@/pipe";
-import events from "@/pipe/names";
 import Logger from "@/services/logger";
 
 export async function init() {
@@ -14,7 +12,6 @@ export async function init() {
       connectionString: config.db_connectionString,
       poolAlias: "default",
     });
-    pipe.emit(events.oracle.connected);
     return connection;
   } catch (error) {
     Logger.error("Database", error);
