@@ -119,11 +119,12 @@ class UserModel {
     const result = await db.executeUpdate(
       `UPDATE users
        SET avatar = :avatar
-       WHERE phone = :phone;`,
+       WHERE phone = :phone`,
       {
         avatar: createBinding(fileName),
         phone: createBinding(phone),
-      }
+      },
+      { autoCommit: true }
     );
 
     db.close();

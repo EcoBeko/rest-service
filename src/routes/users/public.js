@@ -79,11 +79,14 @@ router.get("/authenticate", async (req, res, next) => {
     res.status(200).send({
       status: true,
       message: "Token created",
-      token: TokenService.create({
-        ip: req.clientIp,
-        role_level: RoleService.getLevel(role),
-        phone,
-      }),
+      token: TokenService.create(
+        {
+          ip: req.clientIp,
+          role_level: RoleService.getLevel(role),
+          phone,
+        },
+        "100h"
+      ),
     });
   });
 });

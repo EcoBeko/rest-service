@@ -9,6 +9,7 @@ wallet/
 
 # temporary binaries
 tmp/
+tmp-*
 
 # static files
 static/

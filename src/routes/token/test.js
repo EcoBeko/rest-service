@@ -19,16 +19,15 @@ router.get("/test/need-token", needToken, (req, res) => {
 });
 
 router.post("/test/new-token", (req, res) => {
-  const { role_level, phone } = req.body;
-  const { clientIp } = req;
+  const { role_level, phone, ip } = req.body;
 
   const token = TokenService.create(
     {
+      ip,
       role_level,
       phone,
-      ip: clientIp,
     },
-    "3h"
+    "100h"
   );
 
   res.send({
