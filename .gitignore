@@ -1,8 +1,11 @@
-# npm #
+# npm 
 node_modules/
 
-# babel out #
+# babel out 
 dist/
 
-# wallet #
+# wallet 
 wallet/
+
+# temporary binaries
+tmp/

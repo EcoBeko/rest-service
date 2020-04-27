@@ -1,5 +1,5 @@
 import { Router } from "express";
-import DBService from "@/services/db";
+import { DBService, ImageService } from "@/services";
 import oracledb from "oracledb";
 
 const router = Router();
@@ -56,6 +56,11 @@ router.post("/insert-table", async (req, res) => {
   });
 
   return db.close();
+});
+
+router.post("/upload", async (req, res) => {
+  await ImageService.add(req.files.test);
+  res.sendStatus(200);
 });
 
 export default router;

@@ -12,6 +12,8 @@ const configs = {
   db_connectionString: "",
   server: Server,
   rootPath: "",
+  assetsPath: "",
+  tmpPath: "",
 };
 
 export function setConfig(key, value) {

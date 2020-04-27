@@ -19,6 +19,8 @@ async function main(args) {
   setConfig("server", server);
   setConfig("connection", connection);
   setConfig("rootPath", join(__dirname, "../"));
+  setConfig("assetsPath", join(__dirname, "../assets"));
+  setConfig("tmpPath", join(__dirname, "../tmp"));
 }
 
 main(process.argv);
