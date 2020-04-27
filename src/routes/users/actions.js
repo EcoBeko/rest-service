@@ -1,28 +1,46 @@
 import { UserModel } from "@/models";
-import { isFalsy } from "@/utils";
-import RouteService from "@/services/route";
+import { RouteService, ValidationService } from "@/services";
 
 const router = RouteService.make();
 
-router.post("/register-user", RouteService.wrapper(), async (req, res) => {
-  const { name, surname, password, phone, birthday } = req.body;
-  const route = new RouteService(res);
+router.post("/register-user", async (req, res, next) => {
+  const route = new RouteService(req, res, next);
+  const body = route.extract({
+    name: true,
+    surname: true,
+    password: true,
+    phone: true,
+    birthday: true,
+    gender: false,
+  });
 
-  route.checkParameters(name, surname, password, phone, birthday);
+  body.role = "user";
 
-  req.body.role = "user";
-  const user = UserModel.create(req.body);
+  route.action(() => {
+    const user = UserModel.create(body);
+    route.data.user = user;
+  });
 
-  route.checkValidation(user);
-  route.check(await UserModel.exists(phone), "Phone number already exists", 400);
+  route.checkValidation(route.data.user);
 
-  await user.save();
+  await route.check(
+    async () => await UserModel.exists(route.data.user.phone),
+    "Phone number already exists",
+    400
+  );
+
+  await route.action(async () => await route.data.user.save());
   route.end("User Created", 201);
 });
 
-router.post("/validate", RouteService.wrapper(), (req, res) => {
-  const { field, value } = req.body;
-  const route = new RouteService(res);
+router.post("/validate", (req, res, next) => {
+  const route = new RouteService(req, res, next);
+  const body = route.extract({ field: true, value: true });
+  body[body.field] = body.value;
+
+  route.checkValidation(ValidationService.run("users", body));
+
+  route.end("Credentials are valid", 200);
 });
 
 export default router;

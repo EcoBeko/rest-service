@@ -1,55 +1,84 @@
-import { Logger } from "@/services";
 import { Router } from "express";
 import { isFalsy } from "@/utils";
 
 class RouteService {
-  constructor(res) {
+  constructor(req, res, next) {
+    this.req = req;
     this.res = res;
+    this.next = next;
+    this.isDone = false;
+    this.data = {};
   }
 
   static make() {
     return Router();
   }
 
-  static wrapper() {
-    return (req, res, next) => {
-      try {
-        return next();
-      } catch (err) {
-        if (err.message !== "end")
-          Logger.error("api/users/register-user route", err);
-      }
-    };
+  extract(fields) {
+    const body = {};
+    for (const field in fields) {
+      const value = this.req.body[field];
+
+      if (fields[field] && this.checkParameters(value)) break;
+      body[field] = value;
+    }
+
+    return body;
   }
 
   checkParameters(...params) {
-    this.check(
-      isFalsy(name, surname, password, birthday),
+    return this.checkSync(
+      () => isFalsy(...params),
       "Request conditions are not met",
       412
     );
   }
 
   checkValidation(stats) {
-    this.check(
-      "status" in stats && !stats.status,
-      "Data validation error on " + user.field,
+    return this.checkSync(
+      () => "status" in stats && !stats.status,
+      "Data validation error on " + stats?.field,
       406
     );
   }
 
   end(message, code) {
-    this.check(true, message, code, true);
+    return this.checkSync(() => true, message, code, true);
   }
 
-  check(condition, message, code, status = false) {
-    if (condition) {
+  async action(callback) {
+    if (this.isDone) return false;
+
+    await callback();
+    return true;
+  }
+
+  async check(condition, message, code, status = false) {
+    if (this.isDone) return false;
+    const result = await condition();
+
+    return this.throwError(result, message, code, status);
+  }
+
+  checkSync(condition, message, code, status = false) {
+    if (this.isDone) return false;
+    const result = condition();
+
+    return this.throwError(result, message, code, status);
+  }
+
+  throwError(result, message, code, status) {
+    if (result) {
       this.res.status(code).json({
         status,
         message,
       });
-      throw new Error("end");
+      this.req.isRouteEnd = true;
+      this.isDone = true;
+      this.next(new Error("end"));
     }
+
+    return result;
   }
 }
 

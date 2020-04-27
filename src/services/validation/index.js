@@ -13,10 +13,15 @@ class ValidationService {
     };
 
     for (const testName in validation) {
+      // if no test, skip
+      if (!data[testName]) continue;
+
       result.field = testName;
       result.status = validation[testName](data[testName]);
 
       if (!result.status) break;
+
+      result.field = "";
     }
 
     return result;

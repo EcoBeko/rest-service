@@ -1,17 +1,19 @@
-import { Router } from "express";
 import { UserModel } from "@/models";
+import RouteService from "@/services/route";
 
-const router = Router();
+const router = RouteService.make();
 
-router.get("/test/exists", async (req, res) => {
-  const { phone } = req.body;
+router.get("/test/exists", async (req, res, next) => {
+  const route = new RouteService(req, res, next);
+  const body = route.extract(["phone"]);
 
   res.send({
-    exists: await UserModel.exists(phone),
+    exists: false,
   });
 });
 
-router.post("/test/create", async (req, res) => {
+router.post("/test/create", async (req, res, next) => {
+  const route = new RouteService(req, res, next);
   const user = UserModel.create(req.body);
 
   res.send({
@@ -19,7 +21,8 @@ router.post("/test/create", async (req, res) => {
   });
 });
 
-router.post("/test/save", async (req, res) => {
+router.post("/test/save", async (req, res, next) => {
+  const route = new RouteService(req, res, next);
   const user = UserModel.create(req.body);
 
   res.send({

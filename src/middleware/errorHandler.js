@@ -1,7 +1,10 @@
+import Logger from "@/services/logger";
+
 export default function (options) {
   return (err, req, res, next) => {
-    return res.status(500).send({
-      err,
-    });
+    if (req.isRouteEnd) return;
+
+    Logger.error(req.originalUrl, err);
+    return res.sendStatus(500);
   };
 }
