@@ -26,6 +26,17 @@ class DBService {
     }
   }
 
+  async executeInsert(query, bind, options) {
+    try {
+      const qr = await this.connection.execute(query, bind, options);
+
+      return qr;
+    } catch (err) {
+      Logger.error("DB Service", err);
+      return "insert error";
+    }
+  }
+
   close() {
     this.connection.close();
   }
