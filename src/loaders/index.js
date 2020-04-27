@@ -1,3 +1,5 @@
+"use strict";
+
 import routeCollector from "./route-collector";
 import expressLoader from "./express-loader";
 import config from "@/config";

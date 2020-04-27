@@ -1,4 +1,4 @@
-import { Logger } from "@/services";
+import Logger from "@/services/logger";
 
 export default function () {
   return (req, res, next) => {

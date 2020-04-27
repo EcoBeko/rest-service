@@ -1,11 +1,5 @@
 import deepFreeze from "./deepFreeze";
 import isFalsy from "./isFalsy";
+import makeStatus from "./makeStatus";
 
-const utils = {
-  deepFreeze,
-  isFalsy,
-};
-
-export { deepFreeze, isFalsy };
-
-export default utils;
+export { deepFreeze, isFalsy, makeStatus };

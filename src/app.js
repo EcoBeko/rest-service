@@ -1,3 +1,5 @@
+"use strict";
+
 import config from "./config";
 import { setConfig } from "./config";
 import Loaders from "./loaders";

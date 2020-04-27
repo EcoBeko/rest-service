@@ -1,38 +1,35 @@
 import { Router } from "express";
 import { UserModel } from "@/models";
-import { isFalsy } from "@/utils";
+import { isFalsy, makeStatus } from "@/utils";
+import { Logger } from "@/services";
 
 const router = Router();
 
 router.post("/register-user", async (req, res) => {
   const { name, surname, password, phone, birthday } = req.body;
+  const sendOn = makeStatus(res);
+  try {
+    sendOn(
+      isFalsy(name, surname, password, birthday),
+      "Request conditions are not met",
+      412
+    );
 
-  if (isFalsy(name, surname, password, birthday))
-    return res.status(412).send({
-      status: false,
-      message: "Request conditions are not met",
-    });
+    req.body.role = "user";
+    const user = UserModel.create(req.body);
 
-  if (!UserModel.exists(phone))
-    return res.status(400).send({
-      status: false,
-      message: "Phone number already exists",
-    });
+    sendOn(
+      "status" in user && !user.status,
+      "Data validation error on " + user.field,
+      406
+    );
+    sendOn(await UserModel.exists(phone), "Phone number already exists", 400);
 
-  req.body.role = "user";
-  const user = UserModel.create(req.body);
-
-  if (!user)
-    return res.status(406).send({
-      status: false,
-      message: "Data validation error",
-    });
-
-  await user.save();
-  return res.status(201).send({
-    status: true,
-    message: "User created",
-  });
+    await user.save();
+    sendOn(true, "User Created", 201, true);
+  } catch (err) {
+    if (err.message !== "end") Logger.error("api/users/register-user route", err);
+  }
 });
 
 export default router;
