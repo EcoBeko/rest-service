@@ -62,7 +62,9 @@ class UserModel {
 
     db.executeInsert(
       `insert into users(name, surname, role, password, gender, phone, avatar, birthday) 
-       values(:name, :surname, :role, :password, :gender, :phone, 'awdawd', :birthday);`
+       values(:name, :surname, :role, :password, :gender, :phone, 'awdawd', :birthday);`,
+      {},
+      {}
     );
 
     db.close();

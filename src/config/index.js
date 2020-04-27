@@ -11,6 +11,7 @@ const configs = {
   db_password: "",
   db_connectionString: "",
   server: Server,
+  rootPath: "",
 };
 
 export function setConfig(key, value) {
