@@ -16,11 +16,12 @@ export default (req, res, next) => {
 
       // same ip source
       if (ip === clientIp) {
-        const isAuthorized = RoleService.authorize(role_level, req.url);
+        const isAuthorized = RoleService.authorize(role_level, req.originalUrl);
 
         // resource is available for the role
         if (isAuthorized) {
-          next();
+          req.token = token;
+          return next();
         }
       }
     }

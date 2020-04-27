@@ -4,11 +4,13 @@ import { needToken } from "@/middleware";
 
 const router = Router();
 
-router.get("/need-token", needToken, (req, res) => {
-  res.sendStatus(200);
+router.get("/test/need-token", needToken, (req, res) => {
+  res.send({
+    token: req.token,
+  });
 });
 
-router.get("/new-token", (req, res) => {
+router.post("/test/new-token", (req, res) => {
   const { role_level, phone } = req.body;
   const { clientIp } = req;
 
@@ -23,6 +25,25 @@ router.get("/new-token", (req, res) => {
 
   res.send({
     token,
+  });
+});
+
+router.get("/test/params/:id", needToken, (req, res) => {
+  res.send({
+    id: req.params["id"],
+  });
+});
+
+router.get("/test/:p1/between", needToken, (req, res) => {
+  res.send({
+    p1: req.params["p1"],
+  });
+});
+
+router.get("/test/:p1/multiple/:p2", needToken, (req, res) => {
+  res.send({
+    p1: req.params["p1"],
+    p2: req.params["p2"],
   });
 });
 
