@@ -11,3 +11,7 @@ Content-Type: application/json
   "icon": "icon-4",
   "types": "energy,trees"
 }
+
+###
+
+GET http://localhost:3000/api/test/dummy HTTP/1.1
