@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19.167" height="38.335" viewBox="0 0 19.167 38.335">
+  <g id="battery" transform="translate(-128)">
+    <g id="Group_61" data-name="Group 61" transform="translate(128 0)">
+      <g id="Group_60" data-name="Group 60">
+        <path id="Path_91" data-name="Path 91" d="M144.72,2.556h-2.664V.639A.639.639,0,0,0,141.417,0H133.75a.639.639,0,0,0-.639.639V2.556h-2.664A2.451,2.451,0,0,0,128,5V35.887a2.45,2.45,0,0,0,2.448,2.448H144.72a2.451,2.451,0,0,0,2.448-2.448V5A2.451,2.451,0,0,0,144.72,2.556Zm-1.532,18.3-8.945,10.862a.639.639,0,0,1-1.11-.571l2.342-8.78h-3a.639.639,0,0,1-.493-1.045l8.945-10.862a.639.639,0,0,1,1.11.571l-2.342,8.78h3a.639.639,0,0,1,.493,1.045Z" transform="translate(-128 0)" fill="#ff9100"/>
+      </g>
+    </g>
+    <g id="Group_63" data-name="Group 63" transform="translate(133.826 13.535)">
+      <g id="Group_62" data-name="Group 62">
+        <path id="Path_92" data-name="Path 92" d="M207.113,195.876l6.217-7.549h-2.48a.639.639,0,0,1-.617-.8l1.8-6.745-6.217,7.549h2.48a.639.639,0,0,1,.617.8Z" transform="translate(-205.815 -180.779)" fill="#ff9100"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -3,7 +3,7 @@ import ImageService from "./image";
 import Logger from "./logger";
 import RoleService from "./role";
 import TokenService from "./token";
-import UsersService from "./users";
+import CryptoService from "./crypto";
 import ValidationService from "./validation";
 
 export {
@@ -12,6 +12,6 @@ export {
   Logger,
   RoleService,
   TokenService,
-  UsersService,
+  CryptoService,
   ValidationService,
 };

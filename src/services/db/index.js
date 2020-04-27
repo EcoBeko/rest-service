@@ -45,6 +45,14 @@ class DBService {
   close() {
     this.connection.close();
   }
+
+  static createBinding(val, type = oracledb.STRING, dir = oracledb.BIND_IN) {
+    return {
+      val,
+      type,
+      dir,
+    };
+  }
 }
 
 export default DBService;

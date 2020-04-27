@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.706" height="36.939" viewBox="0 0 20.706 36.939">
+  <g id="Alumin" transform="translate(-721 -598)">
+    <g id="aluminum" transform="translate(1114.96 838)">
+      <g id="Group_48" data-name="Group 48" transform="translate(-393.96 -240)">
+        <path id="Path_48" data-name="Path 48" d="M27.158,32.3H7.627L7.04,30.316H27.746Z" transform="translate(-7.04 4.638)" fill="#b80000"/>
+        <path id="Path_49" data-name="Path 49" d="M25.4.661A.662.662,0,0,0,24.742,0H9.494a.66.66,0,0,0-.661.661h0a.661.661,0,0,0,.661.661h15.25A.66.66,0,0,0,25.4.661Z" transform="translate(-6.766)" fill="#b80000"/>
+        <g id="Group_47" data-name="Group 47" transform="translate(0 2.328)">
+          <path id="Path_50" data-name="Path 50" d="M25.393,2.019h-16L7.04,5.985V33.9H27.746V5.985ZM26.51,21.8c-4.973,1.567-5.8-.588-10.7-1.861s-7.541,3.331-7.541,3.331V12.4s1.862-5.382,7.737-1.469c8.031,5.349,10.5,1.959,10.5,1.959Z" transform="translate(-7.04 -2.019)" fill="#b80000"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
