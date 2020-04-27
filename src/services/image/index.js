@@ -6,7 +6,11 @@ class ImageService {
   static async add(file) {
     try {
       const extension = file.name.substr(file.name.lastIndexOf("."));
-      await file.mv(join(config.assetsPath, `${file.md5}${extension}`));
+      const fileName = `${file.name.replace(extension, "")}-[${
+        file.md5
+      }]${extension}`;
+
+      await file.mv(join(config.assetsPath, fileName));
     } catch (err) {
       Logger.error("Image Service", err);
     }
