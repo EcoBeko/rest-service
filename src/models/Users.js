@@ -53,7 +53,7 @@ class UserModel {
         gender: createBinding(this.gender, oracledb.NUMBER),
         phone: createBinding(this.phone),
         avatar: createBinding(defaultAvatar),
-        birthday: createBinding(this.birthday, oracledb.DB_TYPE_DATE),
+        birthday: createBinding(this.birthday, oracledb.DATE),
       },
       {
         autoCommit: true,
