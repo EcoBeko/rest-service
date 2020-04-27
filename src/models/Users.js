@@ -5,7 +5,7 @@ const { createBinding } = DBService;
 const defaultAvatar = "user-[7753ba0867cf47b9e9525cc557641a99].svg";
 
 class UserModel {
-  constructor(name, surname, password, gender, phone, birthday, role) {
+  constructor({ name, surname, password, gender, phone, birthday, role }) {
     this.name = name;
     this.surname = surname;
     this.password = CryptoService.hashPassword(password);
@@ -22,40 +22,20 @@ class UserModel {
       `SELECT phone FROM users
        WHERE phone = :target`,
       {
-        target: {
-          val: phone,
-          type: oracledb.STRING,
-          dir: oracledb.BIND_IN,
-        },
+        target: createBinding(phone),
       }
     );
     db.close();
 
-    return result.length;
+    return result.length !== 0;
   }
 
-  static async create({ name, surname, password, gender, phone, birthday, role }) {
-    if (
-      !ValidationService.users_name(name) ||
-      !ValidationService.users_surname(surname) ||
-      !ValidationService.users_password(password) ||
-      !ValidationService.users_gender(gender) ||
-      !ValidationService.users_phone(phone) ||
-      !ValidationService.users_birthday(birthday) ||
-      !ValidationService.users_role(role)
-    ) {
-      return false;
-    }
+  static create(data) {
+    const result = ValidationService.run("users", data);
 
-    const user = new UserModel(
-      name,
-      surname,
-      password,
-      gender,
-      phone,
-      birthday,
-      role
-    );
+    if (!result.status) return result;
+
+    const user = new UserModel(data);
     return user;
   }
 

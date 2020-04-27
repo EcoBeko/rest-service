@@ -7,13 +7,13 @@ const router = Router();
 router.post("/register-user", async (req, res) => {
   const { name, surname, password, gender, phone, birthday } = req.body;
 
-  if (!isFalsy(name, surname, password, birthday))
+  if (isFalsy(name, surname, password, birthday))
     return res.status(412).send({
       status: false,
       message: "Request conditions are not met",
     });
 
-  if (UserModel.exists(phone))
+  if (!UserModel.exists(phone))
     return res.status(400).send({
       status: false,
       message: "Phone number already exists",
