@@ -1,5 +1,4 @@
 import routeCollector from "./route-collector";
-import serviceCollector from "./service-collector";
 import expressLoader from "./express-loader";
 import config from "@/config";
 import Logger from "@/services/logger";
@@ -22,11 +21,6 @@ export default class Loaders {
     Logger.log("Express initializing....");
     const app = await expressLoader();
     Logger.log("Express Done");
-
-    // collecting services
-    Logger.log("Services initializing....");
-    await serviceCollector();
-    Logger.log("Services Done");
 
     // collecting routes
     const ignore = [];
