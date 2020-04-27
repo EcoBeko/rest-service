@@ -4,6 +4,7 @@ import config from "@/config";
 import Logger from "@/services/logger";
 import { init as configsInit } from "@/config";
 import { init as dbInit } from "./db-loader";
+import { errorHandler } from "@/middleware";
 
 export default class Loaders {
   static async init(args) {
@@ -30,15 +31,8 @@ export default class Loaders {
       ignore.push("test.js");
     }
     Logger.log("Routes initializing....");
-    app.use(
-      "/api",
-      (req, res, next) => {
-        // Send to the logger
-        Logger.route(req);
-        next();
-      },
-      await routeCollector("routes", ignore)
-    );
+    app.use("/api", await routeCollector("routes", ignore));
+    app.use(errorHandler());
     Logger.log("Routes Done");
 
     return { app, connection };

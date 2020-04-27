@@ -1,9 +1,5 @@
 import needToken from "./needToken";
+import logger from "./logger";
+import errorHandler from "./errorHandler";
 
-const plugins = {
-  needToken,
-};
-
-export { needToken };
-
-export default plugins;
+export { needToken, logger, errorHandler };

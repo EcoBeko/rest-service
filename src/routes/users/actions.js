@@ -5,7 +5,7 @@ import { isFalsy } from "@/utils";
 const router = Router();
 
 router.post("/register-user", async (req, res) => {
-  const { name, surname, password, gender, phone, birthday } = req.body;
+  const { name, surname, password, phone, birthday } = req.body;
 
   if (isFalsy(name, surname, password, birthday))
     return res.status(412).send({
