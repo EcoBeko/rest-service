@@ -27,10 +27,7 @@ class RoleService {
   }
 
   static getLevel(name) {
-    for (const role of roles) {
-      if (role.name === name) return role.level;
-    }
-    return -1;
+    return this.rolesNames().indexOf(name);
   }
 }
 

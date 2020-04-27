@@ -57,16 +57,20 @@ router.get("/authenticate", async (req, res, next) => {
   route.checkValidation(ValidationService.run("users", body));
 
   // 404
-  await route.check(async () => UserModel.exists(phone), "User not found", 404);
+  await route.check(
+    async () => !UserModel.exists(body.phone),
+    "User not found",
+    404
+  );
 
   // fetch user
   await route.action(async () => {
-    const user = UserModel.fetch(phone, password);
+    const user = await UserModel.fetch(body.phone, body.password);
     route.data.user = user;
   });
 
   // 406
-  route.checkSync(() => route.data.user, "Password is incorrect", 406);
+  route.checkSync(() => !route.data.user, "Password is incorrect", 406);
 
   // 200
   route.endAction((req, res) => {

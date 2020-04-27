@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/token/test/need-token HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJpYXQiOjE1ODc5Njk3NjcsImV4cCI6MTU4Nzk4MDU2N30.CyLRiwyVtfRBKClKx5bpJwEWEdBfFwx7kVVaBQJOrn0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjUzOTksImV4cCI6MTU4ODAyODk5OX0.crMVhBixirfSunhNkG3BsDwRzYaPijSttlNXmSBwaoQ
 
 ###
 
@@ -25,3 +25,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowL
 
 GET http://localhost:3000/api/token/test/123/multiple/456 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJpYXQiOjE1ODc5Njk3NjcsImV4cCI6MTU4Nzk4MDU2N30.CyLRiwyVtfRBKClKx5bpJwEWEdBfFwx7kVVaBQJOrn0
+
+###
+
+GET http://localhost:3000/api/token/test/content HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjUzOTksImV4cCI6MTU4ODAyODk5OX0.crMVhBixirfSunhNkG3BsDwRzYaPijSttlNXmSBwaoQ

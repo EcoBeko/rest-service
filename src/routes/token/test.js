@@ -4,6 +4,14 @@ import { needToken } from "@/middleware";
 
 const router = Router();
 
+router.get("/test/content", (req, res) => {
+  res.send({
+    token: TokenService.validate(
+      TokenService.bearerParser(req.headers["authorization"])
+    ),
+  });
+});
+
 router.get("/test/need-token", needToken, (req, res) => {
   res.send({
     token: req.token,
