@@ -11,6 +11,8 @@ class ImageService {
       }]${extension}`;
 
       await file.mv(join(config.assetsPath, fileName));
+
+      return fileName;
     } catch (err) {
       Logger.error("Image Service", err);
     }

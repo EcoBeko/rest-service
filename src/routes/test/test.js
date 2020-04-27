@@ -59,8 +59,10 @@ router.post("/insert-table", async (req, res) => {
 });
 
 router.post("/upload", async (req, res) => {
-  await ImageService.add(req.files.test);
-  res.sendStatus(200);
+  const fileName = await ImageService.add(req.files.test);
+  res.send({
+    fileName,
+  });
 });
 
 export default router;
