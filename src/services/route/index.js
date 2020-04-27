@@ -59,6 +59,13 @@ class RouteService {
     return true;
   }
 
+  actionSync(callback) {
+    if (this.isDone) return false;
+
+    callback();
+    return true;
+  }
+
   async check(condition, message, code, status = false) {
     if (this.isDone) return false;
     const result = await condition();

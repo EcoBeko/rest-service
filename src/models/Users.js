@@ -6,13 +6,14 @@ const { createBinding } = DBService;
 const defaultAvatar = "user-[7753ba0867cf47b9e9525cc557641a99].svg";
 
 class UserModel {
-  constructor({ name, surname, password, gender, phone, birthday, role }) {
+  constructor({ name, surname, password, gender, phone, birthday, role, avatar }) {
     this.name = name;
     this.surname = surname;
     this.password = CryptoService.hashPassword(password);
     this.gender = gender;
     this.phone = phone;
     this.birthday = new Date(Date.parse(birthday));
+    this.avatar = avatar;
     this.role = role;
     this.id = 0;
     this.saved = false;
@@ -107,6 +108,23 @@ class UserModel {
     this.stats = stats;
 
     this.saved = true;
+
+    db.close();
+    return result;
+  }
+
+  static async updatePhoto(phone, fileName) {
+    const db = await DBService.open();
+
+    const result = await db.executeUpdate(
+      `UPDATE users
+       SET avatar = :avatar
+       WHERE phone = :phone;`,
+      {
+        avatar: createBinding(fileName),
+        phone: createBinding(phone),
+      }
+    );
 
     db.close();
     return result;

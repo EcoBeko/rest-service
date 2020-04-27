@@ -42,6 +42,18 @@ class DBService {
     }
   }
 
+  async executeUpdate(query, bind = {}, options = {}) {
+    try {
+      const qr = await this.connection.execute(query, bind, options);
+      return qr;
+    } catch (err) {
+      Logger.error("DB Service", err);
+      return {
+        err: "Update error",
+      };
+    }
+  }
+
   close() {
     this.connection.close();
   }
