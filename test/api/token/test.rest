@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/token/test/need-token HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjUzOTksImV4cCI6MTU4ODAyODk5OX0.crMVhBixirfSunhNkG3BsDwRzYaPijSttlNXmSBwaoQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjYyODAsImV4cCI6MTU4ODAyOTg4MH0.RBUZZkbLgx2_zbhwBVPFaIeU54W5rNBYhoAjlg_6FRU
 
 ###
 

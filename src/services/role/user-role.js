@@ -3,10 +3,8 @@ export default {
   name: "user",
   actions: [
     // test routes
-    "/api/token/test/need-token",
-    "/api/token/test/params/*",
-    "/api/token/test/*/between",
-    "/api/token/test/*/multiple/*",
+    "/api/token/test/*",
+    "/api/users/*",
   ],
   modules: {
     name: "user",

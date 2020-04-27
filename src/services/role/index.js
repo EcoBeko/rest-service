@@ -29,6 +29,10 @@ class RoleService {
   static getLevel(name) {
     return this.rolesNames().indexOf(name);
   }
+
+  static getModules(level) {
+    return roles[level].modules;
+  }
 }
 
 export default RoleService;

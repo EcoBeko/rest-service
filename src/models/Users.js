@@ -38,7 +38,7 @@ class UserModel {
     return new UserModel(data);
   }
 
-  static async fetch(phone, password) {
+  static async fetch(phone, password = "") {
     const db = await DBService.open();
 
     const result = await db.executeSelect(
@@ -49,7 +49,8 @@ class UserModel {
 
     const userData = result[0];
 
-    if (!CryptoService.validatePasswords(password, userData.password)) return false;
+    if (password && !CryptoService.validatePasswords(password, userData.password))
+      return false;
 
     const user = new UserModel(userData);
     user.id = userData.user_id;
