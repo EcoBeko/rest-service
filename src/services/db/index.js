@@ -7,13 +7,17 @@ class DBService {
     this.connection = connection;
   }
   static async open() {
-    const db = new DBService(await pool.getConnection());
-    return db;
+    try {
+      const db = new DBService(await pool.getConnection());
+      return db;
+    } catch (err) {
+      Logger.error("DB Service", err);
+    }
   }
 
-  async executeSelect(query) {
+  async executeSelect(query, bind, options) {
     try {
-      const qr = await this.connection.execute(query);
+      const qr = await this.connection.execute(query, bind, options);
 
       return qr.rows.map((item) => {
         const temp = {};
@@ -29,11 +33,12 @@ class DBService {
   async executeInsert(query, bind, options) {
     try {
       const qr = await this.connection.execute(query, bind, options);
-
       return qr;
     } catch (err) {
       Logger.error("DB Service", err);
-      return "insert error";
+      return {
+        err: "Insert error",
+      };
     }
   }
 
