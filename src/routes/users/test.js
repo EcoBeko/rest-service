@@ -19,4 +19,12 @@ router.post("/test/create", async (req, res) => {
   });
 });
 
+router.post("/test/save", async (req, res) => {
+  const user = UserModel.create(req.body);
+
+  res.send({
+    result: await user?.save(),
+  });
+});
+
 export default router;

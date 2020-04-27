@@ -13,7 +13,7 @@ class ValidationService {
     };
 
     for (const testName in validation) {
-      result.field = field;
+      result.field = testName;
       result.status = validation[testName](data[testName]);
 
       if (!result.status) break;

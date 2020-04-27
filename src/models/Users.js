@@ -11,7 +11,7 @@ class UserModel {
     this.password = CryptoService.hashPassword(password);
     this.gender = gender;
     this.phone = phone;
-    this.birthday = birthday;
+    this.birthday = new Date(Date.parse(birthday));
     this.role = role;
   }
 
@@ -42,9 +42,9 @@ class UserModel {
   async save() {
     const db = await DBService.open();
 
-    db.executeInsert(
+    const result = await db.executeInsert(
       `insert into users(name, surname, role, password, gender, phone, avatar, birthday) 
-       values(:name, :surname, :role, :password, :gender, :phone, :avatar, :birthday);`,
+       values(:name, :surname, :role, :password, :gender, :phone, :avatar, :birthday)`,
       {
         name: createBinding(this.name),
         surname: createBinding(this.surname),
@@ -61,6 +61,7 @@ class UserModel {
     );
 
     db.close();
+    return result;
   }
 }
 
