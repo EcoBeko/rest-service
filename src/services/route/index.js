@@ -46,6 +46,12 @@ class RouteService {
     return this.checkSync(() => true, message, code, true);
   }
 
+  endAction(callback) {
+    if (this.isDone) return false;
+
+    callback(this.req, this.res, this.next);
+  }
+
   async action(callback) {
     if (this.isDone) return false;
 

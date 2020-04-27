@@ -4,13 +4,21 @@ import { DBService } from "@/services";
 const { createBinding } = DBService;
 
 class UserStatsModel {
-  constructor({ user_id }) {
+  constructor({ user_id, trees, energy, waste }) {
     this.user_id = user_id;
-    this.trees = this.energy = this.waste = 0.0;
+    this.trees = trees;
+    this.energy = energy;
+    this.waste = waste;
+    this.id = 0;
   }
 
   static create(data) {
-    return new UserStatsModel(data);
+    return new UserStatsModel({
+      user_id: data.user_id,
+      trees: 0,
+      energy: 0,
+      waste: 0,
+    });
   }
 
   async save() {

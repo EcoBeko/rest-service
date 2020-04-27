@@ -1,5 +1,10 @@
 import { UserModel } from "@/models";
-import { RouteService, ValidationService } from "@/services";
+import {
+  RouteService,
+  ValidationService,
+  TokenService,
+  RoleService,
+} from "@/services";
 
 const router = RouteService.make();
 
@@ -16,12 +21,12 @@ router.post("/register-user", async (req, res, next) => {
 
   body.role = "user";
 
+  route.checkValidation(ValidationService.run("users", body));
+
   route.action(() => {
     const user = UserModel.create(body);
     route.data.user = user;
   });
-
-  route.checkValidation(route.data.user);
 
   await route.check(
     async () => await UserModel.exists(route.data.user.phone),
@@ -41,6 +46,42 @@ router.post("/validate", (req, res, next) => {
   route.checkValidation(ValidationService.run("users", body));
 
   route.end("Credentials are valid", 200);
+});
+
+router.get("/authenticate", async (req, res, next) => {
+  const route = new RouteService(req, res, next);
+  // 412
+  const body = route.extract({ phone: true, password: true });
+
+  // 406
+  route.checkValidation(ValidationService.run("users", body));
+
+  // 404
+  await route.check(async () => UserModel.exists(phone), "User not found", 404);
+
+  // fetch user
+  await route.action(async () => {
+    const user = UserModel.fetch(phone, password);
+    route.data.user = user;
+  });
+
+  // 406
+  route.checkSync(() => route.data.user, "Password is incorrect", 406);
+
+  // 200
+  route.endAction((req, res) => {
+    const { role, phone } = route.data.user;
+
+    res.status(200).send({
+      status: true,
+      message: "Token created",
+      token: TokenService.create({
+        ip: req.clientIp,
+        role_level: RoleService.getLevel(role),
+        phone,
+      }),
+    });
+  });
 });
 
 export default router;

@@ -1,5 +1,5 @@
 import oracledb from "oracledb";
-import { ValidationService, DBService, CryptoService } from "@/services";
+import { DBService, CryptoService } from "@/services";
 import { UserStatsModel } from "@/models";
 
 const { createBinding } = DBService;
@@ -35,11 +35,30 @@ class UserModel {
   }
 
   static create(data) {
-    const result = ValidationService.run("users", data);
-
-    if (!result.status) return result;
-
     return new UserModel(data);
+  }
+
+  static async fetch(phone, password) {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT * from users u JOIN user_stats s ON (u.id = s.user_id) 
+       WHERE u.phone = :phone`,
+      { phone: createBinding(phone) }
+    );
+
+    const userData = result[0];
+
+    if (!CryptoService.validatePasswords(password, userData.password)) return false;
+
+    const user = new UserModel(userData);
+    user.id = userData.user_id;
+    user.saved = true;
+    user.stats = new UserStatsModel(userData);
+    user.stats.id = userData.id;
+
+    db.close();
+    return user;
   }
 
   async getId() {
