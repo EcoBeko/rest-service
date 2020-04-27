@@ -1,22 +1,18 @@
 import { Router } from "express";
-import Logger from "@/services/logger";
-import openConnection from "@/middleware/openConnection";
+import DBService from "@/services/db";
 
 const router = Router();
 
-router.get("/select-table", openConnection, async (req, res) => {
-  try {
-    const result = await req.db.execute("select * from admin.waste_types");
+router.get("/select-table", async (req, res) => {
+  const db = await DBService.open();
 
-    return res.send({
-      result,
-    });
-  } catch (error) {
-    Logger.error("test/select-table route", error);
-    return res.sendStatus(500);
-  } finally {
-    req.db.close();
-  }
+  const qr = await db.executeSelect("select * from admin.waste_types");
+
+  res.send({
+    result: qr,
+  });
+
+  return db.close();
 });
 
 export default router;
