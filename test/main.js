@@ -14,5 +14,3 @@ describe("Configurations", () => {
       expect(process.env.ENV_MODE).to.be.equal("prod");
     });
 });
-
-describe("Database connection", () => {});
