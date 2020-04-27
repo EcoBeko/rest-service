@@ -5,6 +5,7 @@ import RoleService from "./role";
 import TokenService from "./token";
 import CryptoService from "./crypto";
 import ValidationService from "./validation";
+import RouteService from "./route";
 
 export {
   DBService,
@@ -14,4 +15,5 @@ export {
   TokenService,
   CryptoService,
   ValidationService,
+  RouteService,
 };
