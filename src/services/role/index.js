@@ -1,6 +1,7 @@
 import userRole from "./user-role";
+import adminRole from "./admin-role";
 
-const roles = [userRole];
+const roles = [userRole, adminRole];
 
 class RoleService {
   static authorize(role_level, api) {
@@ -19,6 +20,10 @@ class RoleService {
     }
 
     return false;
+  }
+
+  static rolesNames() {
+    return roles.map((item) => item.name);
   }
 }
 

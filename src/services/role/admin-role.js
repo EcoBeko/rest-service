@@ -1,6 +1,6 @@
 export default {
-  level: 0,
-  name: "user",
+  level: 1,
+  name: "admin",
   actions: [
     // test routes
     "/api/token/test/need-token",
@@ -9,6 +9,6 @@ export default {
     "/api/token/test/*/multiple/*",
   ],
   modules: {
-    name: "user",
+    name: "admin",
   },
 };

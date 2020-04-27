@@ -15,7 +15,7 @@ class DBService {
     }
   }
 
-  async executeSelect(query, bind, options) {
+  async executeSelect(query, bind = {}, options = {}) {
     try {
       const qr = await this.connection.execute(query, bind, options);
 
@@ -30,7 +30,7 @@ class DBService {
     }
   }
 
-  async executeInsert(query, bind, options) {
+  async executeInsert(query, bind = {}, options = {}) {
     try {
       const qr = await this.connection.execute(query, bind, options);
       return qr;
