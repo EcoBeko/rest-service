@@ -5,7 +5,7 @@ class TokenService {
   static create(data = {}, lifeTime = "1h") {
     return jwt.sign(data, config.secretKey, {
       expiresIn: lifeTime,
-      algorithm: config.secretAlgorithm
+      algorithm: config.secretAlgorithm,
     });
   }
 
@@ -15,16 +15,6 @@ class TokenService {
     } catch (err) {
       return false;
     }
-  }
-
-  static middle(req, res, next) {
-    const header = req.headers["authorization"];
-
-    if (header) {
-      req.token = this.bearerParser(header);
-      next();
-    }
-    res.sendStatus(403);
   }
 
   static bearerParser(header) {
