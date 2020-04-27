@@ -1,3 +1,4 @@
 import UserModel from "./Users";
+import UserStatsModel from "./UserStats";
 
-export { UserModel };
+export { UserModel, UserStatsModel };

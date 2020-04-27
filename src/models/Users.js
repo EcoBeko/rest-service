@@ -1,5 +1,6 @@
 import oracledb from "oracledb";
 import { ValidationService, DBService, CryptoService } from "@/services";
+import { UserStatsModel } from "@/models";
 
 const { createBinding } = DBService;
 const defaultAvatar = "user-[7753ba0867cf47b9e9525cc557641a99].svg";
@@ -13,6 +14,9 @@ class UserModel {
     this.phone = phone;
     this.birthday = new Date(Date.parse(birthday));
     this.role = role;
+    this.id = 0;
+    this.saved = false;
+    this.stats = null;
   }
 
   static async exists(phone) {
@@ -35,11 +39,28 @@ class UserModel {
 
     if (!result.status) return result;
 
-    const user = new UserModel(data);
-    return user;
+    return new UserModel(data);
+  }
+
+  async getId() {
+    if (this.id) return this.id;
+
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT id FROM users WHERE phone = :phone`,
+      { phone: createBinding(this.phone) }
+    );
+
+    this.id = result[0].id;
+
+    db.close();
+    return this.id;
   }
 
   async save() {
+    if (this.saved) return;
+
     const db = await DBService.open();
 
     const result = await db.executeInsert(
@@ -55,10 +76,17 @@ class UserModel {
         avatar: createBinding(defaultAvatar),
         birthday: createBinding(this.birthday, oracledb.DATE),
       },
-      {
-        autoCommit: true,
-      }
+      { autoCommit: true }
     );
+
+    const userId = await this.getId();
+
+    const stats = UserStatsModel.create({ user_id: userId });
+    await stats.save();
+
+    this.stats = stats;
+
+    this.saved = true;
 
     db.close();
     return result;
