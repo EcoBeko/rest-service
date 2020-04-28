@@ -205,6 +205,42 @@ class UserModel {
     db.close();
     return result;
   }
+
+  async getFriends() {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT * FROM relationships
+       WHERE phone <> :phone AND :id IN (user_1_id, user_2_id)`,
+      {
+        id: createBinding(this.id, oracledb.NUMBER),
+        phone: createBinding(this.phone),
+      }
+    );
+
+    db.close();
+    return result.map((item) => {
+      delete item["password"];
+      return item;
+    });
+  }
+
+  async updateRelationship(id, action) {
+    const db = await DBService.open();
+
+    const result = await db.executeUpdate(
+      `UPDATE friends
+       SET status = :status
+       WHERE id = :id`,
+      {
+        id: createBinding(id, oracledb.NUMBER),
+        status: createBinding(action),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+  }
 }
 
 export default UserModel;

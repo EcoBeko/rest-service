@@ -14,4 +14,14 @@ router.get("/recommendations", needToken, async (req, res) => {
   });
 });
 
+router.get("/fetch", needToken, async (req, res) => {
+  const user = await UserModel.fetch(req.token.phone);
+
+  res.status(200).send({
+    status: true,
+    message: "Friends returned",
+    users: await user.getFriends(),
+  });
+});
+
 export default router;
