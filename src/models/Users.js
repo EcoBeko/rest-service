@@ -151,6 +151,28 @@ class UserModel {
     db.close();
     return result;
   }
+
+  static async updateCredentials(phone, password) {
+    const db = await DBService.open();
+
+    const result = await db.executeUpdate(
+      `UPDATE users
+       SET password = :password
+       WHERE phone = :phone`,
+      {
+        phone: createBinding(phone),
+        password: createBinding(CryptoService.hashPassword(password)),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+    return result;
+  }
+
+  validatePassword(password) {
+    return CryptoService.validatePasswords(password, this.password);
+  }
 }
 
 export default UserModel;
