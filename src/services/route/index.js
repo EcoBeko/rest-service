@@ -50,6 +50,7 @@ class RouteService {
     if (this.isDone) return false;
 
     callback(this.req, this.res, this.next);
+    this.isDone = true;
   }
 
   async action(callback) {

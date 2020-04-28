@@ -5,6 +5,7 @@ export default {
     // test routes
     "/api/token/test/*",
     "/api/users/*",
+    "/api/posts/*",
   ],
   modules: {
     name: "user",
