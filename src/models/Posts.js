@@ -77,6 +77,25 @@ class PostModel {
     db.close();
     return post;
   }
+
+  async save() {
+    const db = await DBService.open();
+
+    const result = await db.executeInsert(
+      `insert into posts(title, article, owner_id, likes, image, time)
+       values(:title, :article, :owner_id, 0, :image, sysdate)`,
+      {
+        title: createBinding(this.title),
+        article: createBinding(this.article),
+        owner_id: createBinding(this.owner.owner_id, oracledb.NUMBER),
+        image: createBinding(this.image),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default PostModel;

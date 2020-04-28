@@ -1,7 +1,9 @@
 import usersValidation from "./users";
+import postsValidation from "./posts";
 
 const validations = {
   users: usersValidation,
+  posts: postsValidation,
 };
 
 class ValidationService {
