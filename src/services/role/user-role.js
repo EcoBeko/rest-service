@@ -6,6 +6,7 @@ export default {
     "/api/token/test/*",
     "/api/users/*",
     "/api/posts/*",
+    "/api/chats/*",
   ],
   modules: {
     name: "user",
