@@ -15,6 +15,18 @@ class WasteModel {
   static create(data) {
     return new WasteModel(data);
   }
+
+  static async fetchAll() {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT * FROM waste_types
+       ORDER BY id`
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default WasteModel;
