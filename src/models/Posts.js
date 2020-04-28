@@ -109,6 +109,24 @@ class PostModel {
     db.close();
     return result;
   }
+
+  async addComment(comment, user_id) {
+    const db = await DBService.open();
+
+    const result = await db.executeInsert(
+      `insert into post_comments(owner_id, post_id, text, time)
+       values(:owner_id, :post_id, :text, sysdate)`,
+      {
+        owner_id: createBinding(user_id, oracledb.NUMBER),
+        post_id: createBinding(this.id, oracledb.NUMBER),
+        text: createBinding(comment),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default PostModel;

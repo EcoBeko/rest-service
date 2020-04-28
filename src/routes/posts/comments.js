@@ -18,27 +18,24 @@ router.get("/:id/comments/fetch", async (req, res) => {
   });
 });
 
-router.post("/:id/comments/fetch", needToken, async (req, res, next) => {
+router.post("/:id/comments/write", needToken, async (req, res, next) => {
   const route = new RouteService(req, res, next);
 
-  const body = route.extract({ title: true, article: true, image: true });
+  const body = route.extract({ comment: true });
+  body.id = req.params["id"] ? +req.params["id"] : 0;
 
-  // validating user input
-  route.checkValidation(ValidationService.run("posts", body));
-
-  // fetch user
+  // fetch user and post
   await route.action(async () => {
     route.data.user = await UserModel.fetch(req.token.phone);
+    route.data.post = await PostModel.fetch(body.id);
   });
 
-  // fetch posts
+  // add comment
   await route.action(async () => {
-    const post = PostModel.create(body);
-    post.owner.owner_id = route.data.user.id;
-    await post.save();
+    await route.data.post.addComment(body.comment, route.data.user.id);
   });
 
-  route.end("Article Created", 201);
+  route.end("Comment Added", 201);
 });
 
 export default router;
