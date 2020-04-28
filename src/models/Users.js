@@ -43,8 +43,8 @@ class UserModel {
     const db = await DBService.open();
 
     const result = await db.executeSelect(
-      `SELECT * from users u JOIN user_stats s ON (u.id = s.user_id) 
-       WHERE u.phone = :phone`,
+      `SELECT * FROM user_with_stats 
+       WHERE phone = :phone`,
       { phone: createBinding(phone) }
     );
 

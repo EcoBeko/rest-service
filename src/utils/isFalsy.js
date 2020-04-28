@@ -1,6 +1,6 @@
 export default (...args) => {
   for (const arg of args) {
-    if (!arg) return true;
+    if (arg == undefined) return true;
   }
 
   return false;
