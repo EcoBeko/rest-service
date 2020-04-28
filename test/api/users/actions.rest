@@ -6,7 +6,7 @@ Content-Type: application/json
   "surname": "test-10",
   "password": "Ansik@Asasin98",
   "gender": 0,
-  "phone": "7070000010123123",
+  "phone": "7070000010",
   "birthday": "2000/09/19"
 }
 
