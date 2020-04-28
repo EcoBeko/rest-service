@@ -29,4 +29,17 @@ router.get("/fetch-portion", needToken, async (req, res, next) => {
   });
 });
 
+router.get("/fetch-one/:id", async (req, res) => {
+  const post = await PostModel.fetch(req.params["id"] ? +req.params["id"] : 0);
+
+  if (!post)
+    return res.status(404).send({ status: false, message: "Post not found" });
+
+  return res.status(200).send({
+    status: true,
+    message: "Success",
+    post,
+  });
+});
+
 export default router;

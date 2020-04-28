@@ -8,10 +8,15 @@ class PostModel {
     this.id = id;
     this.title = title;
     this.article = article;
-    this.owner_id = owner_id;
     this.likes = likes;
     this.image = image;
     this.time = time;
+    this.owner = {
+      owner_id: owner_id,
+      name: "",
+      surname: "",
+      avatar: "",
+    };
   }
 
   static create(data) {
@@ -45,6 +50,32 @@ class PostModel {
 
     db.close();
     return result;
+  }
+
+  static async fetch(id) {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT * FROM posts_owner
+       WHERE id = :id`,
+      { id: createBinding(id, oracledb.NUMBER) }
+    );
+
+    const rawData = result[0];
+
+    if (!rawData) return false;
+
+    const post = new PostModel(rawData);
+
+    post.owner = {
+      name: rawData.name,
+      surname: rawData.surname,
+      avatar: rawData.avatar,
+      owner_id: rawData.owner_id,
+    };
+
+    db.close();
+    return post;
   }
 }
 
