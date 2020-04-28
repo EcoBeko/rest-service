@@ -130,6 +130,27 @@ class UserModel {
     db.close();
     return result;
   }
+
+  static async updateInfo(phone, { name, surname, gender, birthday }) {
+    const db = await DBService.open();
+
+    const result = await db.executeUpdate(
+      `UPDATE users
+       SET name = :name, surname = :surname, gender = :gender, birthday = :birthday
+       WHERE phone = :phone`,
+      {
+        name: createBinding(name),
+        surname: createBinding(surname),
+        gender: createBinding(gender, oracledb.NUMBER),
+        birthday: createBinding(new Date(Date.parse(birthday)), oracledb.DATE),
+        phone: createBinding(phone),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default UserModel;
