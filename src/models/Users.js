@@ -175,7 +175,36 @@ class UserModel {
     return CryptoService.validatePasswords(password, this.password);
   }
 
-  static getRandom() {}
+  async getRandom() {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `WITH 
+       randomUsers AS 
+       (SELECT id, name, surname, avatar, phone FROM users ORDER BY DBMS_RANDOM.RANDOM),
+       withoutStatus1 AS
+       (SELECT * FROM randomUsers u
+         WHERE u.id NOT IN (
+         SELECT user_1_id FROM relationships
+         WHERE user_2_id = :id
+       )
+       ),
+       withoutStatus2 AS
+       (SELECT * FROM withoutStatus1 u
+         WHERE u.id NOT IN (
+         SELECT user_2_id FROM relationships
+         WHERE user_1_id = :id
+       )
+       )
+       SELECT name, surname, avatar, phone FROM withoutStatus2
+       WHERE id <> :id
+       FETCH NEXT 4 ROWS ONLY`,
+      { id: createBinding(this.id, oracledb.NUMBER) }
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default UserModel;
