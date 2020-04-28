@@ -5,21 +5,23 @@ import { UserModel, PointModel } from "@/models";
 
 const router = RouteService.make();
 
-router.post("/fetch:type", async (req, res, next) => {
+router.get("/fetch/:type", async (req, res, next) => {
   const route = new RouteService(req, res, next);
 
   const body = route.extract({ query: true });
-  body.type = req.params["type"] ? +req.params["type"] : 0;
+  body.type = req.params["type"] ?? "";
 
-  // fetch user and post
-  await route.action(async () => {});
-
-  // add comment
   await route.action(async () => {
-    await route.data.post.addComment(body.comment, route.data.user.id);
+    route.data.points = await PointModel.fetchBy(body.type, body.query);
   });
 
-  route.end("Comment Added", 201);
+  route.endAction((req, res) => {
+    res.status(200).send({
+      status: true,
+      message: "Success",
+      points: route.data.points,
+    });
+  });
 });
 
 export default router;
