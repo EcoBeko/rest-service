@@ -96,6 +96,19 @@ class PostModel {
     db.close();
     return result;
   }
+
+  async getComments() {
+    const db = await DBService.open();
+
+    const result = await db.executeSelect(
+      `SELECT * FROM comments_owner
+       WHERE post_id = :post_id`,
+      { post_id: createBinding(this.id, oracledb.NUMBER) }
+    );
+
+    db.close();
+    return result;
+  }
 }
 
 export default PostModel;
