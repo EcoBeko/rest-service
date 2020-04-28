@@ -21,6 +21,31 @@ class UserStatsModel {
     });
   }
 
+  async add(trees, energy, waste) {
+    if (!this.id) return;
+
+    const db = await DBService.open();
+    this.trees += trees;
+    this.energy += energy;
+    this.waste += waste;
+
+    const result = await db.executeInsert(
+      `UPDATE user_stats
+       SET trees = :trees, energy = :energy, waste = :waste
+       WHERE id = :id`,
+      {
+        trees: createBinding(this.trees, oracledb.NUMBER),
+        energy: createBinding(this.energy, oracledb.NUMBER),
+        waste: createBinding(this.waste, oracledb.NUMBER),
+        id: createBinding(this.id, oracledb.NUMBER),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
+    return result;
+  }
+
   async save() {
     const db = await DBService.open();
 
