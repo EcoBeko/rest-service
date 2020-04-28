@@ -2,12 +2,12 @@ POST http://localhost:3000/api/users/register-user HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Ansar",
-  "surname": "Ryspekov",
+  "name": "test-10",
+  "surname": "test-10",
   "password": "Ansik@Asasin98",
-  "gender": 1,
-  "phone": "7086144672",
-  "birthday": "2001/01/19"
+  "gender": 0,
+  "phone": "7070000010123123",
+  "birthday": "2000/09/19"
 }
 
 ###

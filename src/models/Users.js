@@ -49,6 +49,7 @@ class UserModel {
     );
 
     const userData = result[0];
+    if (!userData) return false;
 
     if (password && !CryptoService.validatePasswords(password, userData.password))
       return false;
@@ -173,6 +174,8 @@ class UserModel {
   validatePassword(password) {
     return CryptoService.validatePasswords(password, this.password);
   }
+
+  static getRandom() {}
 }
 
 export default UserModel;
