@@ -29,7 +29,7 @@ class ChatModel {
             ) as message 
         FROM relationships r
         WHERE r.phone <> :phone AND :id IN (r.user_1_id, r.user_2_id)
-        ORDER BY r.last_time DESC`,
+        ORDER BY r.last_time`,
       {
         id: createBinding(id, oracledb.NUMBER),
         phone: createBinding(phone),
@@ -38,6 +38,30 @@ class ChatModel {
 
     db.close();
     return result;
+  }
+
+  static async fetchOne(id, phone, chatId) {
+    const db = await DBService.open();
+
+    const rawMessages = await db.executeSelect(
+      `SELECT * FROM messages
+       WHERE friends_id = 
+           (
+             SELECT id FROM relationships
+             WHERE phone <> :phone AND 
+             :user_id IN (user_1_id, user_2_id) AND
+             id = :chat_id
+           )
+       ORDER BY time`,
+      {
+        user_id: createBinding(id, oracledb.NUMBER),
+        phone: createBinding(phone),
+        chat_id: createBinding(chatId, oracledb.NUMBER),
+      }
+    );
+
+    db.close();
+    return rawMessages;
   }
 }
 
