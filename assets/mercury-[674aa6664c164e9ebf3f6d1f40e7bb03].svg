@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.793" height="29.587" viewBox="0 0 14.793 29.587">
+  <g id="weather" transform="translate(-128)">
+    <g id="Group_130" data-name="Group 130" transform="translate(128)">
+      <g id="Group_129" data-name="Group 129">
+        <path id="Path_126" data-name="Path 126" d="M140.328,16.677V4.931a4.931,4.931,0,0,0-9.862,0V16.677a7.4,7.4,0,1,0,9.862,0ZM135.4,27.121a4.931,4.931,0,0,1-3.287-8.607l.821-.735V4.931a2.466,2.466,0,1,1,4.931,0V17.779l.821.735a4.931,4.931,0,0,1-3.287,8.607Z" transform="translate(-128)" fill="#cc3232"/>
+      </g>
+    </g>
+    <g id="Group_132" data-name="Group 132" transform="translate(134.164 9.862)">
+      <g id="Group_131" data-name="Group 131">
+        <rect id="Rectangle_43" data-name="Rectangle 43" width="2.466" height="14.793" fill="#cc3232"/>
+      </g>
+    </g>
+    <g id="Group_134" data-name="Group 134" transform="translate(131.612 18.406)">
+      <g id="Group_133" data-name="Group 133" transform="translate(0 0)">
+        <ellipse id="Ellipse_59" data-name="Ellipse 59" cx="3.5" cy="4" rx="3.5" ry="4" transform="translate(-0.12 -0.421)" fill="#cc3232"/>
+      </g>
+    </g>
+  </g>
+</svg>

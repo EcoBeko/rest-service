@@ -1,0 +1,15 @@
+GET http://localhost:3000/api/posts/fetch-portion HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMzQwOTgsImV4cCI6MTU4ODM5NDA5OH0.BdxIet3531tgdb5_gVdMs67R6tKiAUYbI7dmtaGuYfQ
+Content-Type: application/json
+
+{
+  "offset": 0
+}
+
+###
+
+GET http://localhost:3000/api/posts/fetch-one/2 HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/posts/10/comments/fetch HTTP/1.1

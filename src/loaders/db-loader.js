@@ -1,3 +1,5 @@
+"use strict";
+
 import oracledb from "oracledb";
 import config from "@/config";
 import Logger from "@/services/logger";

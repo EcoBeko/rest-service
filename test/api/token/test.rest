@@ -1,0 +1,33 @@
+POST http://localhost:3000/api/token/test/new-token HTTP/1.1
+Content-Type: application/json
+
+{
+  "ip": "::1",
+  "role_level": 0,
+  "phone": "7086144672"
+}
+
+###
+
+GET http://localhost:3000/api/token/test/need-token HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjYyODAsImV4cCI6MTU4ODAyOTg4MH0.RBUZZkbLgx2_zbhwBVPFaIeU54W5rNBYhoAjlg_6FRU
+
+###
+
+GET http://localhost:3000/api/token/test/params/123 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJpYXQiOjE1ODc5Njk3NjcsImV4cCI6MTU4Nzk4MDU2N30.CyLRiwyVtfRBKClKx5bpJwEWEdBfFwx7kVVaBQJOrn0
+
+###
+
+GET http://localhost:3000/api/token/test/1231-a23/between HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJpYXQiOjE1ODc5Njk3NjcsImV4cCI6MTU4Nzk4MDU2N30.CyLRiwyVtfRBKClKx5bpJwEWEdBfFwx7kVVaBQJOrn0
+
+###
+
+GET http://localhost:3000/api/token/test/123/multiple/456 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJpYXQiOjE1ODc5Njk3NjcsImV4cCI6MTU4Nzk4MDU2N30.CyLRiwyVtfRBKClKx5bpJwEWEdBfFwx7kVVaBQJOrn0
+
+###
+
+GET http://localhost:3000/api/token/test/content HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwMjUzOTksImV4cCI6MTU4ODAyODk5OX0.crMVhBixirfSunhNkG3BsDwRzYaPijSttlNXmSBwaoQ

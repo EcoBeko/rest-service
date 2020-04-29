@@ -1,0 +1,7 @@
+GET http://localhost:3000/api/chats/fetch HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwOTMyOTUsImV4cCI6MTU4ODQ1MzI5NX0.xEShEWXWo4tPRBHLHIHZmUgv0hLzLkAaNmNi9hM5Ink
+
+###
+
+GET http://localhost:3000/api/chats/2/fetch HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpcCI6Ijo6ZmZmZjoxMjcuMC4wLjEiLCJyb2xlX2xldmVsIjowLCJwaG9uZSI6IjcwODYxNDQ2NzIiLCJpYXQiOjE1ODgwOTMyOTUsImV4cCI6MTU4ODQ1MzI5NX0.xEShEWXWo4tPRBHLHIHZmUgv0hLzLkAaNmNi9hM5Ink

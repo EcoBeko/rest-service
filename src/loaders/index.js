@@ -1,10 +1,12 @@
+"use strict";
+
 import routeCollector from "./route-collector";
-import serviceCollector from "./service-collector";
 import expressLoader from "./express-loader";
 import config from "@/config";
 import Logger from "@/services/logger";
 import { init as configsInit } from "@/config";
 import { init as dbInit } from "./db-loader";
+import { errorHandler } from "@/middleware";
 
 export default class Loaders {
   static async init(args) {
@@ -23,11 +25,6 @@ export default class Loaders {
     const app = await expressLoader();
     Logger.log("Express Done");
 
-    // collecting services
-    Logger.log("Services initializing....");
-    await serviceCollector();
-    Logger.log("Services Done");
-
     // collecting routes
     const ignore = [];
 
@@ -36,15 +33,8 @@ export default class Loaders {
       ignore.push("test.js");
     }
     Logger.log("Routes initializing....");
-    app.use(
-      "/api",
-      (req, res, next) => {
-        // Send to the logger
-        Logger.route(req);
-        next();
-      },
-      await routeCollector("routes", ignore)
-    );
+    app.use("/api", await routeCollector("routes", ignore));
+    app.use(errorHandler());
     Logger.log("Routes Done");
 
     return { app, connection };
