@@ -42,7 +42,7 @@ class PostModel {
        ) OR owner_id = :id
        )
        SELECT * FROM postsFromFriendsAndYou
-       ORDER BY TIME
+       ORDER BY TIME DESC
        OFFSET ${offset} ROWS 
        FETCH NEXT 3 ROWS ONLY`,
       { id: createBinding(id, oracledb.NUMBER) }
@@ -136,6 +136,23 @@ class PostModel {
 
     db.close();
     return result;
+  }
+
+  async setLike(like) {
+    const db = await DBService.open();
+
+    await db.executeUpdate(
+      `UPDATE posts
+       SET likes = likes + :like
+       WHERE id = :id`,
+      {
+        like: createBinding(like, oracledb.NUMBER),
+        id: createBinding(this.id, oracledb.NUMBER),
+      },
+      { autoCommit: true }
+    );
+
+    db.close();
   }
 }
 

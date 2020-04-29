@@ -28,4 +28,15 @@ router.post("/write", needToken, async (req, res, next) => {
   route.end("Article Created", 201);
 });
 
+router.post("/like", async (req, res) => {
+  const { like, id } = req.body;
+
+  const post = await PostModel.fetch(id);
+  post.setLike(like);
+  res.send({
+    status: true,
+    message: "Liked",
+  });
+});
+
 export default router;

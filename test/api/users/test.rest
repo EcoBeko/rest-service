@@ -10,13 +10,13 @@ POST http://localhost:3000/api/users/test/create HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "test",
-  "surname": "test",
+  "name": "admin",
+  "surname": "admin",
   "password": "Ansik@Asasin98",
   "gender": 1,
-  "phone": "7086144670",
+  "phone": "7000000000",
   "birthday": "2001/01/19",
-  "role": "user"
+  "role": "admin"
 }
 
 ###
