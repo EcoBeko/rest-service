@@ -48,7 +48,7 @@ router.post("/validate", (req, res, next) => {
   route.end("Credentials are valid", 200);
 });
 
-router.get("/authenticate", async (req, res, next) => {
+router.post("/authenticate", async (req, res, next) => {
   const route = new RouteService(req, res, next);
   // 412
   const body = route.extract({ phone: true, password: true });

@@ -30,7 +30,7 @@ class PostModel {
       `with
        postsFromFriendsAndYou AS
        (
-         SELECT * FROM posts
+         SELECT * FROM posts_owner
          WHERE owner_id IN (
          SELECT DISTINCT 
          CASE 
@@ -48,8 +48,18 @@ class PostModel {
       { id: createBinding(id, oracledb.NUMBER) }
     );
 
+    const posts = [];
+    for (const post of result) {
+      const temp = new PostModel(post);
+      temp.owner.owner_id = post.owner_id;
+      temp.owner.name = post.name;
+      temp.owner.surname = post.surname;
+      temp.owner.avatar = post.avatar;
+      posts.push(temp);
+    }
+
     db.close();
-    return result;
+    return posts;
   }
 
   static async fetch(id) {

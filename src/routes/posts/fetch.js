@@ -4,10 +4,14 @@ import { UserModel, PostModel } from "@/models";
 
 const router = RouteService.make();
 
-router.get("/fetch-portion", needToken, async (req, res, next) => {
+router.get("/fetch-portion/:offset", needToken, async (req, res, next) => {
   const route = new RouteService(req, res, next);
 
-  const body = route.extract({ offset: true });
+  const body = {};
+
+  route.actionSync(() => {
+    body.offset = +req.params["offset"];
+  });
 
   // fetch user
   await route.action(async () => {

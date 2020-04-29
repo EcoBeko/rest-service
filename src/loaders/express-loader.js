@@ -28,8 +28,8 @@ export default async () => {
       debug: config.isProduction,
     })
   );
+  app.use(express.static(join(config.rootPath, "assets")));
   app.use(express.static(join(config.rootPath, "static")));
-  app.use(express.static("/assets", config.assetsPath));
   app.use(logger());
 
   return app;
