@@ -1,11 +1,9 @@
 import RouteService from "@/services/route";
-import ValidationService from "@/services/validation";
-import { needToken } from "@/middleware";
-import { UserModel, PointModel } from "@/models";
+import { PointModel } from "@/models";
 
 const router = RouteService.make();
 
-router.get("/fetch/:type", async (req, res, next) => {
+router.post("/fetch/:type", async (req, res, next) => {
   const route = new RouteService(req, res, next);
 
   const body = route.extract({ query: true });
